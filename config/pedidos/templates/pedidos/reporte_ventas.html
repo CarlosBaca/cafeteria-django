@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Reporte de ventas</h2>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5>Total de pedidos</h5>
+                <p class="fs-4">{{ cantidad_pedidos }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5>Total vendido</h5>
+                <p class="fs-4">S/ {{ total_vendido }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if pedidos %}
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Número de pedido</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for pedido in pedidos %}
+        <tr>
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.usuario.username }}</td>
+            <td>{{ pedido.fecha }}</td>
+            <td>S/ {{ pedido.total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+
+<div class="alert alert-info">
+    Aún no existen ventas registradas.
+</div>
+
+{% endif %}
+
+{% endblock %}

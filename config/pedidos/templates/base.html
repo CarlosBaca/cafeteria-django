@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cafetería</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <!--  NAVBAR -->
+    <nav class="mb-3">
+        <a href="/inicio/" class="btn btn-outline-primary">Inicio</a>
+        <a href="/productos/" class="btn btn-outline-primary">Productos</a>
+        <a href="/carrito/" class="btn btn-outline-primary">Carrito</a>
+        <a href="/mis-pedidos/" class="btn btn-outline-primary">Mis pedidos</a>
+        <a href="{% url 'reporte_ventas' %}" class="btn btn-outline-primary">Reporte de ventas</a>
+    </nav>
+
+    <hr>
+
+    <!--  MENSAJES -->
+    {% if messages %}
+        {% for message in messages %}
+
+            {% if message.tags == 'error' %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+
+            {% elif message.tags == 'success' %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+
+            {% elif message.tags == 'warning' %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                </div>
+
+            {% else %}
+                <div class="alert alert-info">
+                    {{ message }}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+
+    <!--  CONTENIDO DINÁMICO -->
+    {% block content %}{% endblock %}
+
+</div>
+
+</body>
+</html>

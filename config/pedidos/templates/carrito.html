@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Carrito</h2>
+
+{% if carrito %}
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key, value in carrito.items %}
+        <tr>
+            <td>{{ value.nombre }}</td>
+            <td>{{ value.cantidad }}</td>
+            <td>
+                <a href="{% url 'agregar' key %}" class="btn btn-success btn-sm">+</a>
+                <a href="{% url 'restar' key %}" class="btn btn-warning btn-sm">-</a>
+                <a href="{% url 'eliminar' key %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="mt-3">
+    <a href="{% url 'limpiar' %}" class="btn btn-secondary">
+        Vaciar carrito
+    </a>
+
+    <a href="{% url 'confirmar_pedido' %}" class="btn btn-primary">
+        Confirmar pedido
+    </a>
+</div>
+
+{% else %}
+
+<div class="alert alert-info">
+    El carrito está vacío
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Productos</h2>
+
+<form method="get" class="mb-4">
+    <div class="input-group">
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Buscar producto por nombre"
+            value="{{ busqueda }}"
+        >
+
+        <button type="submit" class="btn btn-primary">
+            Buscar
+        </button>
+
+        <a href="{% url 'lista_productos' %}" class="btn btn-secondary">
+            Limpiar
+        </a>
+    </div>
+</form>
+
+{% if productos %}
+
+<ul class="list-group">
+    {% for p in productos %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+        <div>
+            <strong>{{ p.nombre }}</strong><br>
+            Precio: S/ {{ p.precio }}<br>
+            Stock: {{ p.stock }}
+        </div>
+
+        <div>
+            <a href="{% url 'agregar' p.id %}" class="btn btn-success btn-sm">
+                Agregar
+            </a>
+        </div>
+
+    </li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<div class="alert alert-warning">
+    No se encontraron productos con esa búsqueda.
+</div>
+
+{% endif %}
+
+{% endblock %}

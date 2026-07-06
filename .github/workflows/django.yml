@@ -13,6 +13,11 @@ jobs:
   revisar-proyecto:
     runs-on: ubuntu-latest
 
+    # Ejecuta los comandos dentro de la carpeta config
+    defaults:
+      run:
+        working-directory: config
+
     steps:
       # Descarga el codigo del repositorio
       - name: Descargar codigo
